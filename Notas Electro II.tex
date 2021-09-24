@@ -1,0 +1,558 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\author{Rodrigo Vega Vilchis\\
+Correo: rockdrigo6@ciencias.unam.mx\\
+\small Electromagnetismo II}
+\title{Notas de Electrodinámica}
+\date{Semestre 2022-1}
+
+\begin{document}
+\maketitle
+
+\vspace*{-1.3cm}
+\setlength{\unitlength}{1cm}
+
+
+\begin{picture}(10,0) 
+\put(0,2.5){\includegraphics[scale=.2]{unam1.png}}
+\put(14.7,2.4){\includegraphics[scale=.3]{ciencias.png}}  
+\end{picture}
+\tableofcontents
+
+\begin{abstract}
+Estas notas son del curso de \emph{Electromagnetismo II} con Abraham García, en principio tiene contenidos en electroestática que son notas sobre clases previas al 20 de Septiembre del 2021, fecha de inicio del semestre. Posterior al 20 se hará una acotación para identificar un antes y después, los contenidos de electro II ya serán mas de electrodinámica, creo...
+\end{abstract}
+\section{Electroestática}
+\subsection{Fuerza de Coulomb y Campo Eléctrico}
+La primera clase estabamos discutiendo sobre la fuerza de Coulomb y de las unidades que debe tener la constante $k$ para que $\vec{F}_C$ tenga unidades de fuerza. Recordemos que 
+$$k=\frac{1}{4\pi\epsilon_0}$$
+nos conviene trabajar con estas unidades y con la constante $\epsilon_0$ para cuando estamos haciendo trabajo experimental. Sin embargo, podemos recurrir a las unidades naturales para cuando estamos haciendo trabajo teórico. En este curso estaremos utilizando unidades naturales en donde:
+$$k=1$$
+de modo que se cumpla:
+$$1\simeq\frac{1}{4\pi\epsilon_0}\qquad\Leftrightarrow\qquad4\pi=\frac{1}{\epsilon_0}$$
+Cabe mencionar que este ''1'' guarda las unidades necesarias para que la fuerza coulombiana se exprese en Newtons. Con base en esta información podemos definir la fuerza coulombiana en términos del S.I. y de unidades naturales como se muestra a continuación:
+$$\vec{F}=k\frac{q_1q_2}{r^2}\vec{r},\qquad\vec{F}=\frac{q_1q_2}{r^2}\vec{r}$$
+Para poder definir un campo Eléctrico necesitamos la invervención de una carga $q_1$ ya sea negativa o positiva, y una carga de prueba $q$, ambas cargas están estáticas y separadas entre sí una cierta distancia. \textbf{Cabe resaltar que para que exista un campo eléctrico debe existir la interacción de dos cargas, siempre.} Dado un sistema de referencia, vamos a definir dos vectores: $\vec{r}_1$ asociado a la carga $q_1$ y un vector $\vec{r}$ que se asocia a la carga de prueba y que puede estar en cualquier lugar del espacio.
+
+Entonces podemos definir ahora el campo Eléctrico como sigue:
+\begin{align*}
+\vec{E}&=\frac{q_1}{\|\vec{r}-\vec{r}_1\|^2}\ \hat{r},\qquad\hat{r}=\frac{\vec{r}-\vec{r}_1}{\|\vec{r}-\vec{r}_1\|}\\
+&=q_{1}\cdot\frac{\vec{r}-\vec{r}_1}{\|\vec{r}-\vec{r}_1\|^3}
+\end{align*}
+Podemos definir el campo Eléctrico de un conjunto discreto de cargas (de misma carga) como sigue:
+\begin{align*}
+\vec{E}(\vec{r})&=\sum_i\vec{E}_i\\
+&=\sum_i q_i\cdot\frac{\vec{r}-\vec{r}_i}{\|\vec{r}-\vec{r}_i\|^3}
+\end{align*}
+y aún podemos extender la definción a un conjunto de cargas continuo, para ello vamos a necesitar de una densidad de carga $\rho(\vec{r})$, entonces:
+$$\vec{E}(\vec{r})=\int\rho(\vec{r}\ ')\frac{\vec{r}-\vec{r}\ '}{\|\vec{r}-\vec{r}\ '\|^3}dV'$$
+el diferencial de volumen de nuestra integral está enfocado en una pequela vencidad volumétrica situada en la densidad de carga.
+
+\subsubsection{Ley de Gauss} 
+Para líneas de campo eléctrico $\vec{E}$ y vectores normales a una superficie (gaussiana), la cantidad $\vec{E}\cdot\hat{n}$ representa el flujo para una componente de campo eléctrico, es decir, una sola contribución. Para hallar el flujo completo debemos integrar con respecto de una superficie:
+$$\Phi=\int\vec{E}\cdot\hat{n}da$$
+Otro modo de ver una contribución del flujo es mediante el diferencial de flujo:
+$$d\Phi=\vec{E}\cdot\hat{n}da,\qquad d\vec{a}=\hat{n}da$$
+si consideramos que $\vec{E}=\frac{q}{r^2}\hat{r}$, entonces podemos escribir:
+\begin{align*}
+d\Phi&=\vec{E}\cdot\hat{n}\ da\\
+&=\frac{q}{r^2}\hat{r}\cdot\hat{q}\ da\\
+&=\frac{q}{r^2}\cos\theta\ da
+\end{align*}
+podemos asociar el anterior diferencial con un \emph{ángulo sólido}, el cual podemos escribir como $$\cos\theta\ da=r^2d\Omega$$
+y la integral sobre una superficie cerrada del ángulo sólido es:
+$$\oint d\Omega=4\pi=\int_0^{2\pi}\int_0^\pi\sin\ d\theta d\phi\footnote{checar la veracidad de esta integral, más específico el tema de \emph{ángulo sólido.}}$$
+por lo tanto, la integral del flujo sobre una superficie cerrada (gaussiana) es igual a:
+$$\oint\vec{E}\cdot\hat{n}\ da=4\pi q$$
+cabe mencionar que si la carga se encuentra dentro, el resultado es $4\pi q$, mientras que si la carga se encuentra fuera de la superficie gaussiana, entonces la integral es igual a cero.
+
+Para una distribución discreta y continua de cargas tenemos los siguientnes resultados:
+\begin{align*}
+\oint \sum_i \vec{E}_i\cdot\hat{n}\ da&=4\pi\sum_i q_i\\
+\oint \sum_i \vec{E}_i\cdot\hat{n}\ da&=4\pi\int \rho(\vec{r}\ ') dV'
+\end{align*}
+
+\subsubsection{Teorema de la Divergencia}
+Imaginemos que tenemos una densidad de carga definida en el espacio, decimos que en el límite cuando la superficie gausssiana y la densidad de carga son iguales tenemos el siguiente resultado
+\begin{align*}
+\oint_{\partial V}\vec{E}\cdot\hat{n}\ da&=4\pi\int_V \rho(\vec{r})\ dV,\\
+\int_V\nabla\cdot\vec{E}\ dV&=4\pi\int_V \rho(\vec{r})\ dV\\
+\int_V\left[\nabla\cdot\vec{E}-4\pi\rho(\vec{r})\right]\ dV&=0\\
+\therefore\quad \nabla\cdot\vec{E}&=4\pi\rho,\qquad\text{primera ecuación de Maxwell}
+\end{align*}
+De este resultado tenemos una conclusión importante: \textbf{el campo eléctrico es un campo conservativo}. Recordemos algunos aspectos de cálculo vectorial para que podamos definir el llamado \emph{campo consevativo.}
+\begin{enumerate}
+\item Para que sea campo conservativo, primordialmente se debe cumplir:
+\begin{equation}\label{eq:campoConservativo}
+F(r)=-\nabla V(r)
+\end{equation}
+siendo que $V(r)$ es un campo escalar, que representa en otras palabras un \textbf{potencial} de la fuerza.
+\item Definiendo el trabajo como la integral de línea sobre una curva $L$ tenemos,
+\begin{equation}\label{eq:trabajo}
+W=\int_L F(r)\ dr
+\end{equation}
+sin embargo, si tenemos que la curva es cerrada, es decir que su inicio y final de la trayectoria coinciden entonces tenemos lo siguiente:
+\begin{equation}\label{eq:trabajoCerrado}
+\oint_C F(r)\ dr=0,\qquad\therefore\ W=0
+\end{equation}
+\item Por último y no menos importante tenemos que el campo es \emph{continuo} y cumple la condición de integrabilidad:
+$$\frac{\partial F_k}{\partial x_i}=\frac{\partial F_i}{\partial x_k}$$
+esto implica que si la \emph{rotación} desaparece, entonces se cumple 
+\begin{equation}\label{eq:rotacionalCero}
+\nabla \times F(r)=0
+\end{equation} 
+tocaremos este punto más adelante.
+\end{enumerate}
+En este caso, el campo eléctrico $\vec{E}$ está determinado por un potencial eléctrico $\phi$, y de acuerdo a lo visto anteriormente, se relacionan de la siguiente manera
+$$\vec{E}=-\nabla \phi$$
+es por ello que decimos que el campo eléctrico es un campo conservativo.
+
+Como ejemplo, nos vamos a agarrar a  la cantidad 
+$$\phi=\frac{1}{\|\vec{r}-\vec{r}\ '\|}$$
+como el potencial y le vamos a aplicar el gradiente para ver que obtenemos.
+$$\frac{\partial}{\partial x}\frac{1}{\|\vec{r}-\vec{r}\ '\|}=\frac{x-x'}{\left(\sqrt{(x-x')^2+(y-y')^2+(z-z')^2}\right)^3}$$
+si hacemos lo mismo para las parciales $\frac{\partial}{\partial y}$ y $\frac{\partial}{\partial z}$, obtendríamos un resultado similar solo que con $y-y'$ y $z-z'$ en el numerador. Si hacemos el gradiente de $\frac{1}{\|\vec{r}-\vec{r}\ '\|}$ concluimos que,
+\begin{equation}\label{gradientePotencial}
+\nabla\frac{1}{\|\vec{r}-\vec{r}\ '\|}=\frac{\vec{r}-\vec{r}\ '}{\|\vec{r}-\vec{r}\ '\|^3}
+\end{equation}
+podemos apreciar en (\ref{gradientePotencial}) que el gradiente del inverso de la distancia de las cargas $q_1$ y la carga de prueba $q$ nos genera el campo Eléctrico de nuestro sistema. Podemos ver esto en términos de una densidad de carga como sigue:
+$$\vec{E}(\vec{r})=\int\rho(\vec{r}\ ')\frac{\vec{r}-\vec{r}\ '}{\|\vec{r}-\vec{r}\ '\|^3}\ dV'=-\nabla\underbrace{\int\rho(\vec{r}\ ')\frac{1}{\|\vec{r}-\vec{r}\ '\|}\ dV'}_{\phi(\vec{r})}$$
+notemos que como el gradiente actúa con respecto $\vec{r}$, puede salir de la integral que se efectúa con respecto al vector $\vec{r}\ '$ situado en la densidad de carga para un diferencial de volumen $dV'$.
+
+Para poder entender la relación física que guarda el campo eléctrico con las equipotenciales miremos el siguiente diagrama
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{dipolo}
+\caption{Dipolo eléctrico con líneas de campo eléctrico y equipotenciales.}
+\label{fig1:dipolo}
+\end{figure}
+
+Esta figura nos representa un dipolo eléctrico donde la carga roja es positiva y la carga azul es negativa. Podemos aprecial sus líneas de campo y curvas cerradas que encierran las cargas a la que llamamos \textbf{equipotenciales}. Decimos que para que exista trabajo, se debe cumplir la integral de línea (\ref{eq:trabajo}), y en específico el producto interior $\vec{E}\cdot dr\neq0$, para que el trabajo sea distinto de cero. En otras palabras, para que exista trabajo debemos desplazarnos desde una equipotencial a otra, es decir, que el ángulo que hace una línea de campo eléctrico con respecto del diferencial de la equipotencial $dr$ debe ser distinto de $\frac{\pi}{2}$; en otro caso, cuando nos movemos sobre una equipotencial, decimos que no existe trabajo porque estaríamos haciendo la integral sobre una curva cerrada (\ref{eq:trabajoCerrado}), otro modo de verlo es que el ángulo entre las líneas de campo y la equipotencial es igual a $\frac{\pi}{2}$ por lo que $\vec{E}\cdot dr=0$
+
+Recordemos que es la fuerza de la que hablamos para el tratado del trabajo $W$, solo que la fuerza la expresamos en términos del campo eléctrico, es decir $\vec{F}=q\vec{E}$. Otro detalle más, es que cuando hablamos de las equipotenciales, estamos hablando de "pedazos“ del potencial $\phi(\vec{r})$; prácticamente este potencial nos genera nuestro campo eléctrico porque el campo eléctrico es conservativo (\ref{eq:campoConservativo}).
+
+Del teorema de la divergencia de Gauss podemos generar un nuevo resultado que apoya la idea de que nuestro campo eléctrico $\vec{E}$ es conservativo. Si nosotros hacemos 
+\begin{align*}
+\nabla\cdot\vec{E}&=4\pi\rho\\
+\nabla\cdot(-\nabla\phi)&=4\pi\rho\\
+\Delta\phi&=4\pi\rho\\
+\end{align*}
+este resultado es muy interesante porque no siempre podremos determinar la cantidad $4\pi\rho$, ya que no siempre será trivial obtener la densidad de carga; lo que si podemos obtener es la ecuación diferencial de la izquierda, \textbf{la llamada ecuación de Poisson}. Es más probable que nosotros conozcamos el potencial que la densidad de carga del sistema.
+
+Podemos seguir jugando con identidades vectoriales, más precisamente con
+\begin{align*}
+\nabla\times-\nabla\phi&=0\\
+\nabla\times \vec{E}&=0
+\end{align*}
+La primera identidad la sabemos debido a que el rotacional de una función escalar, por definición es cero\footnote{corroborar esto (?)}, por lo tanto podemos concluir que el rotacional del campo eléctrico y en general, de un campo conservativo es igual a cero, lo que habíamos estipulado en (\ref{eq:rotacionalCero}). Esta es otra ecuación de Maxwell solo que para el caso cuando la carga se mantiene estática.
+
+Físicamente, la interpretación del rotacional del campo igual a cero significa \textbf{la conservación de la carga,} es decir, que las líneas de campo de nuestra carga se mantienen “intactas'', es decir que sus líneas no cambian su posición en el tiempo; esto también implica que las curvas cerradas equipotenciales se mantienen como curvas cerradas y no como una espiral por ejemplo. Sin embargo, tenemos el caso para cuando una carga se mueve, es decir, cuando sufre un cambio de posición en el tiempo, el rotacional lo podemos escribir ahora sí de manera completa como 
+\begin{equation}\label{eq:rotacionalChido}
+\nabla\times\vec{E}=-\frac{\partial\vec{B}}{\partial t}
+\end{equation}
+Pero esto lo veremos en la siguiente sección del curso, una vez pasado el 20 de septiembre.
+
+Hasta ahora hemos concluido lo siguiente
+\begin{itemize}
+\item El campo eléctrico $\vec{E}$ es irrotacional, no “gira'' porque sus líneas de campo no cambian de posición en el tiempo.
+\item Las fuerzas electro-estáticas se conservan, debido a que el campo eléctrico es conservativo.
+\item La carga se conserva
+\end{itemize}
+Ahora adentremonos un poco más en que podemos obtener del potencial y como poder tratar con él.
+
+\subsection{Potencial}
+
+En esta sección queremos determinar las formas del potencial y justificar el por qué hicimos la elección de potencial $\frac{1}{\|\vec{r}-\vec{r}\ '\|}$ en seccienes anteriores. Vamos a tomarnos un sistema en donde tengamos una carga $q_1=1$, de antemano sabemos que el potencial lo escribimos como
+$$\phi(\vec{r})=\int\rho(\vec{r}\ ')\frac{1}{\|\vec{r}-\vec{r}\ '\|}\ dV'$$	
+para una densidad de carga, y
+\begin{equation}\label{eq:potencial1/r}
+\phi(\vec{r})=\frac{q}{\|\vec{r}-\vec{r}\ '\|}
+\end{equation}
+recordemos que $\vec{r}$ es el vector de la carga de muestra $q$, mientras que el vector $\vec{r}\ '$ es el vector de nuestra densidad de carga o carga. Si posicionamos nuestro sistema en el origen de nuestro sistema de coordenadas tenemos de modo que $\vec{r}\ '=0$, entonces
+$$\phi(\vec{r})=\frac{q}{\|\vec{r}-\vec{0}\|}=\frac{1}{\vec{r}}$$
+Entonces, podemos obtener la siguiente expresión con base en este resultado
+$$\nabla^2\phi=\nabla^2\frac{1}{r}=4\pi\rho\ \footnote{pequeño abuso de notación, vamos a hacer como si $\vec{r}=r$}$$
+¿qué sucede con nuestro potencial cuando hacemos $r\to 0$?, en principio nuestro potencial no está definido, pero veremos a continuación que es posible “parcharlo'' con unos cuantos trucos matemáticos. Podemos detemrinar valores de este potencial en el limite.
+
+Vamos hacer un proceso límite y para ello necesitamos integrar el lado derecho de la ec. de Poisson en una vecindad alrededor de $r=0$, definamos dicha vecindad como $V$, entonces:
+$$\int_V\nabla^2\frac{1}{r}\ dV=\int_{V}\nabla\cdot\left(\nabla\frac{1}{r}\right)dV$$
+queremos transformar esta integral, por medio del teorema de la divergencia, en una integral de superficie cerrada. Entonces 
+\begin{align*}
+\int_{V}\nabla\cdot\left(\nabla\frac{1}{r}\right)dV&=\oint_{\partial V}\nabla\frac{1}{r}\cdot\hat{n}\ da\\
+&=\oint_{\partial V}\frac{\partial}{\partial r}\frac{1}{r}r^2\ d\Omega\\
+&=-\oint_{\partial V}\left(\frac{1}{r^2}\right)r^2\ d\Omega\\
+&=-4\pi
+\end{align*}
+este resultado no nos dice como es $\nabla\frac{1}{r}$ en $r=0$, sino más bien, nos brinda un resultado de lo que existe en una vecindad alrededor de $r=0$.
+
+\subsubsection{Función Delta de Dirac}
+Decimos que la llamada Delta de Dirac, en realidad es un funcional que nos proporciona una distribución para “un solo punto'' (más o menos), la definimos como
+\begin{equation}
+f(a)=\int_{-\infty}^{\infty}f(x)\delta(x-a)\ dx
+\end{equation}
+se puede mostrar que la “forma'' que tiene esta funcional es más o menos como una distribución gaussiana:
+$$f(x,\sigma)=\frac{1}{\sqrt{\pi}\sigma}e^{-\frac{x^2}{\sigma^2}}$$
+cuando hacemos $\sigma\to 0$, tenemos nuestra delta de dirac. ¿Para qué la vamos a ocupar?, vamos a definir las distribuciones de carga (discretas o continuas) en términos de la delta de Dirac.
+
+Tomando como referencia nuestro ejemplo de siempre en donde tenemos\footnote{Estaría chido aprender a generar imágenes para este tipo de cuestiones} una distribución de carga (continua o discreta) con vectores $\vec{r}\ '$ y nuestra carga de prueba con vector $\vec{r}$ podemos generar una densidad de carga\footnote{Para el caso discreto, vamos a suponer que una superficie encierra a todas las cargas y por ello podemos hablar de una denisad como tal.} con la delta de Dirac de la siguiente manera
+\begin{equation}\label{eq:deltaDiracDiscreta}
+\rho(\vec{r})=\sum_{i=1}^{N}q_i\delta(\vec{r}-\vec{a})\ \footnote{Notemos como aquí la densidad se enfoca sobre el vector $\vec{r}$ y no sobre los vectores de posición de las distribuciones de carga (continua y discreta)}
+\end{equation}
+esta expresión nos dice que la densidad vale $q_i$ en todos los lugares menos en $\vec{r}$ donde la delta vale cero.
+
+Vamos a retomar la situación en donde teníamos una carga $q_1=1$ con vector $\vec{r}\ '$, y definíamos un potencial como lo describe la ecuación (\ref{eq:potencial1/r}), en donde poníamos nuestras cargas en el origen de coordenadas ($\vec{r}\ '=0$); habíamos dicho que el potencial en $\vec{r}=0$ no está definido pero si tenemos valores en el límite, para cuando integramos sobre una vecindad alrededor de $\vec{r}=0$, habíamos dicho que su valor era $-4\pi$.
+
+Pues ahora vamos a mezclar estos resultados con la delta de Dirac del siguiente modo, la ecuación de Poisson la podemos reescribir en términos de la delta de Dirac como:
+$$\nabla^2\frac{1}{r}=-4\pi\delta(\vec{r}),\qquad\text{ya que }\vec{r}\ '=0$$
+practicamente esta relación nos dice que para $\vec{r}\neq\vec{r}\ '$ el valor del gradiente de este potencial el $-4\pi$, lo que ya habíamos encontrado, pero en este caso, cuando $\vec{r}=\vec{r}\ '$ y más aún cuando $\vec{r}\ '=0$, el valor que nosotros le asignamos es cero\footnote{más o menos parcha la intedeterminación}. Por otro lado, si la carga $q_1=1$ no se encuentra en el origen del sistema de coordenadas, podemos redefinir el potencial y agregar información a lo que hasta ahora hemos encontrado. Definimos ahora la ecuación de Poisson como
+$$\nabla^2\frac{1}{\|\vec{r}-\vec{r}\ '\|}=-4\pi\delta(\vec{r}-\vec{r}\ '),\qquad \text{donde definíamos }\rho(\vec{r})=\delta(\vec{r}-\vec{r}\ ')$$
+Extendiendo este resultado para el caso continuo, para una densidad de carga continua tenemos
+\begin{align*}
+\nabla^2\phi&=\int\rho(\vec{r}\ ')\nabla^2\frac{1}{\|\vec{r}-\vec{r}\ '\|}\ dV'\\
+&=-\int\rho(\vec{r}\ ')\cdot 4\pi\delta(\vec{r}-\vec{r}\ ')\ dV'\\
+&=-4\pi\rho(\vec{r})
+\end{align*}
+por lo tanto concluimos 
+$$\nabla^2\phi=-4\pi\rho(\vec{r}),\qquad\text{para el potencial }\phi(\vec{r})=\frac{1}{\|\vec{r}-\vec{r}\ '\|}$$
+\newpage
+\subsection{Energía Potencial de una carga en el campo Eléctrico}
+
+Para poder definir la energía potencial de una carga sumergida en un campo eléctrico, es necesario considerar el trabajo que hace la carga en dicho campo. Recordando que definimos el vector de fuerza como $\vec{F}(\vec{r})=q\vec{E}(\vec{r})$, definimos la energía potencial como
+\begin{align*}
+W&=\int_L \vec{F}\cdot dr\\
+&=q\int_L\vec{E}\cdot dr\\
+&=-q\int_L\nabla\phi\cdot dr\\
+&=-q\int_a^b\left(\frac{\partial\phi}{\partial x}dx+\frac{\partial\phi}{\partial y}dy+\frac{\partial \phi}{\partial z}dz\right)\\
+&=-q\int_a^b d\phi\\
+&=-q\left[\phi(b)-\phi(a)\right]
+\end{align*}
+Con ello hemos podido encontrar una expresión para la energía potencial del sistema, la definimos como $W(\vec{r})=U(\vec{r})$, 
+\begin{equation}\label{eq:trabajoU}
+U(\vec{r})=q\phi(\vec{r})
+\end{equation}
+la energía potencial es prácticamente una función escalar. Reforzando los criterios de campo conservativo tenemos que el trabajo no depende de la trayectoria sino únicaente de los puntos inicial y final de dicha trayectoria
+$$W=U(b)-U(a)$$
+
+\subsubsection{Ecuaciones de Fresnel Eléctricas (algo asi)}
+En optica veíamos que las ecuaciones de Fresnel nos relacionan las amplitudes de los campos eléctricos: incidentes, reflejados y trasmitidos cuando un haz de luz incide sobre cierta superficie plana como convención. Ahora veamos el caso análogo para líneas de un campo eléctrico que inciden sorbe alguna superficie suave. Como dato a consdierar en algún futuro, definamos la carga superficial
+$$\sigma(\vec{r})=\frac{dq}{da},\qquad q=\int\sigma(\vec{r})\ da$$
+Para determinar las expresiones de \emph{fresnel} eléctricas vamos a considerar el siguiente esquema
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.25]{fresnelEle}
+\caption{Esquema para las ecuaciones de Fresnel eléctricas}
+\label{fig:esquema}
+\end{figure}
+
+consideramos una línea de campo eléctrico antes de cruzar la superficie, la llamamos $\vec{E}_1$, y otra línea de campo después de cruzar la superficie, la llamamos $\vec{E}_2$. Como podemos ver, existe una alteración en la dirección del campo eléctrico y es justamente lo que vamos a estudiar. Usando la ley de Gauss tenemos
+\begin{align*}
+\int_V\nabla\cdot\vec{E}\ dV&=4\pi\int_{\partial V}\sigma\ da\\
+\oint_{\partial V}\vec{E}\cdot\hat{n}da&=4\pi\sigma a\\
+&\text{notemos que $\vec{E}=\vec{E}_1+\vec{E}_2$}\\
+\oint_{\partial V}\left(\vec{E}_{1n}+\vec{E}_{2n}\right)\cdot\hat{n}da&=4\pi\sigma a\\
+-\vec{E}_{1n}+\vec{E}_{2n}&=4\pi\sigma 
+\end{align*}
+Por otro lado de la Ley de Stokes podemos generar la siguiente \emph{ecuación de fresnel}
+\begin{align*}
+\int_{\partial V}\nabla\times\vec{E}\ da&=0\\
+\Longrightarrow\quad \oint\vec{E}\cdot dr&=0\\
+\left(\vec{E}_{2t}-\vec{E}_{1t}\right)\cdot dr&=0\\
+\Rightarrow\quad\vec{E}_{2t}&=\vec{E}_{1t}
+\end{align*}
+¿Qué son estas ecuaciones y qué nos están diciendo? Para la primera ecuación debemos notar que tenemos vectores normales de campo eléctrico, es decir que las componentes transversales en la primera ecuación no juegan. ¿Por qué? si nosotros nos fijamos en el producto interno de la Ley de Gauss, notamos que se efectúa con vectores normales a la superficie, es por ello que las componentes de campo eléctrico transversales desaparecen; para la Ley de Stokes es diferente, en este caso estamos haciendo el producto interior con diferenciales que se encuentran en la superficie, es decir, ortogonales a vectores normales a la superficie; es por ello que para este caso, la componente normal desaparece y prevalecen solo las componentes transversales.
+
+Entonces ¿qué nos dicen físicamente estos resultados? que el campo eléctrico al cruzar una superficie cambia su componente normal una cantidad 
+\begin{equation}\label{eq:frenselNormal}
+\Delta\vec{E}_n=4\pi\sigma(\vec{r})
+\end{equation}
+mienrtas que la componente transversal de campo eléctrico no cambia
+\begin{equation}\label{eq:fresnelTransversal}
+\vec{E}_{2t}=\vec{E}_{1t}
+\end{equation}
+
+\newpage
+\subsection{Momento Dipolar Eléctrico}
+eq:La figura (\ref{fig1:dipolo}) nos representa el esquema de lo que es un dipolo eléctrico. Prácticamente consiste en 2 cargas una negativa y otra positiva que van a generar un campo eléctrico en conjunto, tal y como se aprecia en la figura. Sin embargo, vamos a poder conocer una cantidad llamada \textbf{momento dipolar eléctrico} que caracterizará una fuerza generada por el campo eléctrico en el que se encuentra sumergido el dipolo (veremos esto más adelante).
+
+Nuevamente hacemos el mismo tratamiento que antes, definimos nuestro dipolo
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{dipoloEsquema}
+\caption{Diagrama del dipolo considerando sus vectores de posición
+}
+\label{fig:dipoloEsquema}
+\end{figure}
+dos cargas separadas una distancia $d$, y un punto $p$ o carga de prueba con vector de posición $\vec{r}$. La carga $+q$ y $-q$ tienen vectores $\vec{r}_+$ y $\vec{r}_-$ respectivamente que van al punto $p$. Definimos el potencial con base en lo que hemos encontrado anteriormente de la siguiente manera
+$$\phi(\vec{r})=\frac{q_+}{\vec{r}_+}-\frac{q_-}{\vec{r}_-}$$
+escribimos en coordenadas cartesianas nuestro vector $\|\vec{r}\|=\sqrt{x^2+y^2+z^2}$, y a partir de ello escribimos los vectores de posición $\vec{r}_+$ y $\vec{r}_-$; considermos que para el vector $\vec{r}_+$ tenemos una cantidad en $x_+=\left(x-\frac{d}{2}\right)^2$, entonces
+\begin{align*}
+r_+&=\sqrt{\left(x-\frac{d}{2}\right)^2+x^2+z^2} \\
+&=\sqrt{x^2+y^2+z^2-dx+\frac{a^2}{4}}\\\\
+&=\sqrt{r^2-dx+\frac{a^2}{4}},\qquad\text{factorizamos }r^2\\
+&=r\sqrt{1-\frac{dx}{r^2}+\left(\frac{a}{2r}\right)^2}
+\end{align*}
+y obtenemos el mismo resultado para $r_-$
+$$r_-=r\sqrt{1+\frac{dx}{r^2}+\left(\frac{a}{2r}\right)^2}$$
+Entonces ahora podemos ir complementando nuestro potencial con estas expresiones, para ello vamos a aproximar con series de taylor a primer orden nuestras expresiones, quedando
+\begin{align*}
+r_+&=r\left(1-\frac{dx}{2r^2}\right)\\
+r_-&=r\left (1+\frac{dx}{2r^2}\right)
+\end{align*}
+entonces
+$$\phi(\vec{r})=\frac{q_+}{r\left(1-\frac{dx}{2r^2}\right)}-\frac{q_-}{r\left(1+\frac{dx}{2r^2}\right)}$$
+resolviendo y simplificando tenemos
+\begin{equation}\label{eq:dipoloElectrico}
+\phi(\vec{r})=\frac{dqx}{r^3}
+\end{equation}
+definimos a la ecuación (\ref{eq:dipoloElectrico}) como \textbf{el potencial del dipolo eléctrico}, tenemos que observar que durante nuestro tratado, nosotros despreciamos dos cantidades que representan el término octopolar y cuadrupolar, que para fines de esta sección solo nos interesa la expresión del momento dipolar. Dichos términos, nada más para tenerlos en cuenta son:
+$$\left(\frac{d}{2r}\right)^2,\qquad \left(\frac{dx}{2r^2}\right)^2$$
+la razon de excluirlos en este tratado es que ambas cantidades son $\ll1$
+
+
+\subsubsection{Campo del dipolo}
+A partir del potencial 
+$$\phi(\vec{r})=\frac{dqx}{r^3}$$
+vamos a determinar cual es el campo del dipolo. Para ello vamos a definir una cantidad llamada \textbf{momento dipolar magnético}, que va a estar implicita en el potencial del dipolo. Dicha cantidad es un vector que va de la carga negativa a la carga positiva y se denomina con el vector $\vec{p}$, su magnitud esta definida por
+$$\|\vec{p}\|=qd$$
+entonces podemos redefinir el potencial en términos de esta cantidad como
+$$\phi(\vec{r})=\frac{\vec{p}\cdot\vec{r}}{r^3},\qquad\text{sin embargo, está incompleta xq nos falta un }\cos\theta\ \footnote{$\vec{r}\cdot\vec{p}=\|\vec{r}\|\|\vec{p}\|\cos\theta$}$$
+hacemos $\vec{r}$ unitario y cambiamos
+$$\phi(\vec{r})=\frac{\vec{p}\cdot\hat{r}}{r^2}=\frac{p\cos\theta}{r^2}\ \footnote{tenemos que checar bien este paso, en principio yo entendí que la cantidad $p\cos\theta$ es la proyección de $\vec{r}$ sobre $\vec{p}$ y justo lo que nos interesa es la parte del momento dipolar eléctrico $\|\vec{p}\|=dq$} $$
+recurriendo a la definición de campo conservativo tenemos
+\begin{align*}
+\vec{E}&=-\nabla\phi(\vec{r}),\\
+&=-\frac{\partial\phi}{\partial r}\hat{r}-\frac{1}{r}\frac{\partial\phi}{\partial\theta}\hat{\theta},\qquad\text{el vector lo estamos viendo en coordenadas polares convenientemente}\\
+&=\frac{2p\cos\theta}{r^3}\hat{r}+\frac{p\sin\theta}{r^3}\hat{\theta},\qquad\text{sumamos la cantidad }\frac{1}{r^2}\left(p\cos\theta\hat{r}-p\cos\theta\hat{r}\right)\\
+&=\frac{3p\cos\theta}{r^3}\hat{r}-\frac{p}{r^3}\left(\cos\theta\hat{r}-\sin\theta\hat{\theta}\right)\\ 
+&=\frac{3(\vec{p}\cdot\vec{r})}{r^3}\hat{r}-\frac{\vec{p}}{r^3}
+\end{align*}
+la cantidad $p\left(\cos\theta\hat{r}-\sin\theta\hat{\theta}\right)$ es en realidad la magnitud de $\vec{p}$ en dirección de $\hat{p}$, por lo que en pricipio tenemos nuestro vector de momento dipolar $\vec{p}$.
+
+Por lo tanto, podemos definir el campo del dipolo bajo la siguiente expresión.
+\begin{equation}\label{eq:campoDipolo}
+\vec{E}_d=\frac{3(\vec{p}\cdot\vec{r})\hat{r}-\vec{p}}{r^3}
+\end{equation}
+Recordemos que la cantidad $\vec{p}\cdot\vec{r}$ la podíamos ver como la magnitud del vector $\vec{p}$ en dirección de $\hat{r}$, y se le resta el vector de momento dipolar magnético entre el cubo de la distancia a la carga de prueba $q$, ese es el vector del campo eléctrico del dipolo.
+
+Igual como hicimos con el potencial en $r=0$, qué sucede con el campo del dipolo (\ref{eq:campoDipolo}) en $r=0$, ya que evidenemente ahí el campo no está definido. Pues vamos a trabajar este problema en el limite cuando $r\to0$, es decir, vamos a integrar el campo en una vecindad alrededor del cero. Antes de comenzar, desarrollemos los pasos para llegar al teorema de la divergencia, consideremos el potencial del dipolo como $\phi_d$
+\begin{align*}
+\vec{E}_d&=-\nabla\phi_d,\qquad\text{aplicando la divergencia en ambos lados tenemos}\\
+\nabla\cdot\vec{E}_d&=-\nabla\cdot(\nabla\phi_d)\\
+&=-\nabla^2\phi_d,\qquad\text{integrando ambos lados en el volumen de la esfera considerada tenemos}\\
+\int_V\nabla\cdot\vec{E}_d\ dV&=-\int_V\nabla^2\phi_d\ dV\\
+\end{align*}
+aplicamos el teorema de la divergencia en la parte izquierda de la iguadad
+\begin{align*}
+-\int_V\nabla^2\phi_d\ dV&=-\oint_{\partial V}\nabla\phi_d  \cdot r^2d\Omega\\
+&=-\oint_{\partial V}\nabla\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\cdot r^2d\Omega\\
+&=-\oint_{\partial V}\frac{\partial}{\partial r}\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\cdot r^2d\Omega\qquad\text{integramos por partes}\\
+&=\frac{8\pi}{r}\vec{p}
+\end{align*}
+y así llegamos al resultado\footnote{debo corregir este cálculo pronto, esta mal.}, pero aún así debemos parchar el resultado con la delta de dirac:
+$$\frac{8\pi}{r}\vec{p}\delta(\vec{r}),\footnote{Hay que escribir la ecuación completa del campo con su parche}$$
+
+\newpage
+\subsection{Energía de una distribución de carga}
+
+\subsubsection{Enegía de una distribución discreta}
+Debemos reconocer cuales son las unidades de la energía potencial y el potencial de una distribución de carga, para no confundirnos con los términos. Recordemos que la energía potencial la manejamos en [Joules], mientras que el potencial tiene unidades de [Volts]. Más aún, el potencial lo definimos como un medio abstracto que genera una carga y del cual se define un campo eléctrico $\vec{E}$ asociado. Mientras que la diferencia de potencial $\Delta\phi$ (lo que se puede medir en un multimetro) es el camino abstracto que define como se mueve una carga $q$, misma trayectoria de la que hablamos para definir trabajo.
+
+Una vez dicho el recordatorio, vamos a imaginar un sistema con una carga de prueba $q$ y con vector de posición $\vec{r}$, vamos a imaginar que en $\infty$ se encuentra un conjunto determinado de cargas que se irán acercando a nuestra carga de prueba. Ahora imaginemos que una carga $q_1$ la acercamos de infinito a una posición $\vec{r}_1$ “cerca'' de la carga $q$. Esta acción genera: un campo eléctrico $\vec{E}$, y por lo mismo una fuerza necesaria para acercar $q_1$ a $q$, también se genera un potencial debido a la interacción. Conforme vayamos acercando “más'' cargas, las interacciones eléctricas se irán acomplejando.
+
+Para acercar la n-ésima carga, necesitaremos la energía de todas las cargas que conforman ahora al sistema, para poder generar una fuerza que ponga en un $\vec{r}_n$ cerca de la carga $q$, es decir algo de tipo: $U_n=\sum_{i=1}^{n-1}u_i$\ \footnote{el sumando $u_i$ representa la energía potencial de cada carga con respecto de la carga $q_n$, no confundir con $U_i$ que sería la energía potencial total para $i\in\{1,..,n\}$ cargas}.  Sin embargo, la energía total de la distribución de carga estaría dada por la suma de todas las las energías potenciales para cada carga, es decir $U=\sum_{i=2}^{n}U_i$, representa el total de energía utilizada para construir una distribución de carga y será equivalente a la energía almacenada del sistema.
+
+Vamos a ver la construcción de este sistema discreto. La primer carga genera un campo $\vec{E}$, no genera trabajo pero si genera un primer potencial $$\phi_1(\vec{r})=\frac{q_1}{\|\vec{r}-\vec{r}_1\|},\qquad \text{recordemos que $\vec{r}$ es el vector de la carga de prueba $q$}$$
+este primer potencial afectará cuando la segunda carga llegue, ahora si habrá trabajo:
+$$U_2=q_2\phi_1(\vec{r}_2)$$
+notemos que esta es la expresión de trabajo que habíamos encontrado en (\ref{eq:trabajoU}) aplicado al vector de posición de la carga $q_2$, sin embargo, esta nueva interacción con la carga $q_1$ y $q$ genera un nuevo potencial 
+$$\phi_2(\vec{r})=\frac{q_2}{\|\vec{r}-\vec{r}_2\|}\ \footnote{recordemos que esta expresión tiene implicita las interacciones con $q_1$ y la carga de prueba $q$}$$
+y con ello podemos determinar la energía de la segunda carga con base en los potenciales anteriores, dada por
+$$U_3=q_3\phi_1(\vec{r}_3)+q_3\phi_2(\vec{r}_3)$$
+así como ya vislumbramos anteriormente, la energía para la carga n-ésima será
+\begin{align*}
+U_n&=q_n(\phi_1(\vec{r}_n)+\cdots+\phi_{n-1}(\vec{r}_n)\\
+&=q_n\sum_{k=1}^{n-1}\phi_k(\vec{r}_n)
+\end{align*}
+sin embargo, como se especificó anteriormente, la energía total de la distribución de carga (o energía almacenada) esta dada por la suma de todas las contribuciones
+$$U=\sum_{i=2}^{N}U_i\ \footnote{cabe aclarar que las cargas $q_i$ son arbitrarias}$$
+recordemos que para $i=1$, no hay interacción entre cargas $q_i$. Podemos reescribir un par de veces nuestra expresión
+\begin{align*}
+U&=\sum_{i=2}^{n}q_i\sum_{k=1}^{i-1}\frac{q_k}{\|\vec{r_i}-\vec{r}_k\|}\\
+&=\sum_{i=2}^{n}\sum_{k=1}^{i-1}\frac{q_iq_k}{\|\vec{r_i}-\vec{r}_k\|}\\
+\end{align*}
+\begin{equation}\label{eq:energiaDiscreta}
+U=\frac{1}{2}\sum_{i=2}^{n}\sum_{i\neq k}^{n}\frac{q_iq_k}{\|\vec{r_i}-\vec{r}_k\|}
+\end{equation}
+notemos que para la última igualdad estamos sumando cada término dos veces debido a la manera en que estamos corriendo la segunda suma, es por ello que tenemos que agregar el $\frac{1}{2}$. Además, es preciso mencionar que la interacción es entre cargas distintas, por ello ponemos $i\neq k$, el caso en donde $i=k$ al menos a mi modo de ver no existe, porque la carga $q_i$ es única y no es posible que ocupen el mismo lugar, en principio veamos que el denominador se indeterminaría. Además, la física moderna no lo permite debido a la incertidumbre de Heinseberg\footnote{No veo claro como aplicarla, pero lo escuché en clase cx}
+
+Ahora veamos que sucede con una distribución de carga continua.
+\subsubsection{Energía de una distribución continua}
+Ahora cada carga $q_i$ estará representada por un elemento diferencial de carga
+$$q_i\to\rho(\vec{r})dV$$
+dado en un diferencial de volumen. Cada uno de esos diferenciales representa el espacio donde se encuentran las cargas para todo $\vec{r}$ que vive en la densidad $\rho(\vec{r})$. Definimos la energía total como
+$$U=\int_{V'}\int_V\frac{\rho(\vec{r})\rho(\vec{r}\ ')}{\|\vec{r}-\vec{r}\ '\|}\ dVdV'$$
+recordemos que anteriormente habíamos escrito el potencial de una distribución continua en términos de una integral.
+$$\phi(\vec{r})=\int_{V'}\rho(\vec{r}\ ')\frac{1}{\|\vec{r}-\vec{r}\ '\|}\ dV'$$
+entonces la energía total del sistema puede estar escrita en términos del potencial
+\begin{equation}\label{eq:energiaContinua}
+U=\int_V\phi(\vec{r})\rho(\vec{r})\ dV
+\end{equation}
+Para resolver esta integral debemos conocer ya sea o el potencial o la densidad de carga, pero a veces la densidad de carga no es tan trivial obtenerla y es más probable conocer el potencial de la distribución. Por tanto ocupamos la ecuación de Poisson para  dejar todo en términos del potencial
+$$-\frac{\nabla^2\phi}{4\pi}=\rho(\vec{r})$$ 
+y ahora tenemos
+$$U=-\frac{1}{8\pi}\int_V\phi\nabla^2\phi\ dV$$
+vamos a considerar la cantidad $\nabla\cdot(\phi\nabla\phi)$ y aplicamos la regla del producto para para poder integrar por partes utilizando la primera identidad de Green\footnote{Saqué este paso del \textbf{David Borthwick - Introduction to partial differential equations} p. 23 (2.16)}
+\begin{align*}
+\nabla\cdot(\phi\nabla\phi)&=\nabla\phi\cdot\nabla\phi+\phi\nabla^2\phi\\
+&=(\nabla\phi)^2+\phi\nabla^2\phi
+\end{align*}
+integramos sobre un volumen $V$ que encierra a la densidad de carga
+\begin{align*}
+\int_V\nabla\cdot(\phi\nabla\phi)\ dV&=\int_V\left[(\nabla\phi)^2+\phi\nabla^2\phi\right]dV \\
+\oint_{\partial V}\phi\nabla\phi\cdot\hat{n} dS&=\int_V\left[(\nabla\phi)^2+\phi\nabla^2\phi\right]dV,\qquad\text{aplicamos Ley de Gauss en la parte izquierda} \\
+0&=\int_V\left[(\nabla\phi)^2+\phi\nabla^2\phi\right]dV \\
+\int_V\phi\nabla^2\phi\ dV&=-\int(\nabla\phi)^2\ dV\\
+&=-\int_V E^2\ dV,\qquad\text{considerando que }E^2=\vec{E}\cdot\vec{E}
+\end{align*}
+sin embargo, necesitamos regresar a nuestra integral que involucra la ecuación de Poisson, decimos que la energía total (y almacenada) de una distribución de carga está dada por
+\begin{equation}\label{eq:energiaDefinitiva}
+U=-\frac{1}{8\pi}\int_V\phi\nabla^2\phi\ dV=\frac{1}{8\pi}\int_V E^2\ dV
+\end{equation}
+en el tercer renglón de nuestro anterior desarrollo ocurrió algo peculiar, decimos que la integral de superficie cerrada es igual a cero, ¿por qué?. El argumento es más bien físico que matemático, si nosotros recurrimos a la ley de Gauss tenemos de dos sopas
+$$\oint_{\partial V}\vec{E}\cdot\hat{n}dS=4\pi\int_V\rho(\vec{r})dV\begin{cases}4\pi q,\qquad&\text{si la carga está dentro de la superficie gaussiana}\\
+0,&\text{si la carga fuera la superficie gaussiana}\end{cases}$$
+si nosotros hacemos considerablemente “grande'' nuestra superficie/volumen gaussiano, hacemos que en la mayoría de los puntos $\rho=0$, por otro lado, mientras incrementamos el volumen de la superficie, hacemos que la integral de $E^2$ se incremente también, mientras que la integral de superficie decrece debido a que el potencial $\phi\propto \frac{1}{r}$, $\nabla\phi\propto\frac{1}{r^2}$ y la superficie crece como $\propto r^2$, esto implica que la integral de superficie es $\propto\frac{1}{r}$ y para $r\to\infty$, la integral tiende a cero. Así que en términos formales, la integral de superficie NO es cero, pero nos conviene que sea cero (con base  en el argumento anterior) para fines prácticos.
+
+Hablemos ahora del resultado principal en cuestion (\ref{eq:energiaDefinitiva}), nos interesa mucho esta conlcusión porque hemos encontrado que la energía de la distribución de carga es proporcional al cuadrado del campo eléctrico. Se había visto que la energía de las ondas Electro-magnéticas es proporcional a la suma de los cuadrados del campo eléctrico y magnético
+$$U_{EM}\propto E^2+B^2$$
+más específicamente, en óptica se visulumbró como debe de ser
+$$U_{EM}=\frac{\epsilon_0}{2}E^2+\frac{1}{2\mu_0}B^2$$
+Espero que conforme avancemos en el curso, retomemos este resultado y veamos de donde sale la contribución de campo magnético.
+
+\begin{abstract}
+Hasta aquí hemos concluido las clases previas al 20 de Septiembre que corresponden a un “repaso'' formalización de Electroestática, trataré de ahora en adelante poner fechas a cada sesión que vaya agregando. No se con que vayamos a arrancar a partir de hoy 20 de septiembre 2021 pero ya lo estaremos descubriendo. Ahora si, Electrodinámica ha empezado (espero)
+\end{abstract}
+
+
+%Clase del 20 de Septiembre del 2021
+\subsection{Identidades de Green}
+
+Recomiendo echarle un vistazo al formalismo de las identidades de Green en el siguiente libro \textbf{Introduction to Partial Differential Equations - David Borthwick} p. 23 (intentaré subir el libro al repositorio)
+
+Podemos establecer otras maneras de determinar el potencial eléctrico mediante una superficie gaussiana y no únicamente con el volumen como lo hacíamos anteriormente, para ello es necesario definir las \emph{identidades de Green}. Anteriormente lo que hacíamos para conocer el potencial de una distribución de carga es determinar la integral de una densidad de carga alrededor de cierto volumen
+$$\phi(\vec{r})=\int_V\frac{\rho(\vec{r}\ ')}{\|\vec{r}-\vec{r}\ '\|}\ dV',\qquad\text{recordemos que estamos integrando con respecto de las primadas}$$
+sin embargo, debemos saber que nos siempre es trivial conocer dicha densidad de carga $\rho$ ya que no siempre tendremos distribuciones simétricas como las que se trabajaban en Electro I. Es por ello que necesitamos de otros medios para poder determinar el potencial
+\subsubsection{Primera identidad de Green}
+A continuación, vamos a construir el formalismo de las identidades de Green. Definimos un campo vectorial $\vec{F}(\vec{r})=\varphi\nabla\psi$.\footnote{tal y como hicimos en la sección pasada para determinar la energía total de una distribución de carga continua.} Aplicamos la divergencia en ambos lados y desarrollamos la regla de Leibniz 
+\begin{align*}
+\nabla\cdot\vec{F}&=\nabla\cdot(\varphi\nabla\psi)\\
+&=\nabla\varphi\cdot\nabla\psi+\varphi\nabla^2\psi\\
+\end{align*}
+integramos con respecto de $V$ ambos lados
+\begin{equation}\label{eq:integrarCampos}
+\int_V\nabla'\cdot\vec{F}\ dV'=\int_V\left(\nabla'\varphi\cdot\nabla'\psi+\varphi\nabla'^2\psi\right)dV'\ \footnote{es indispensable precisar el por qué estamos primando algunas variables: lo hacemos para reconocer con respecto a que estamos integrando y qué estamos integrando (integrar algo que esta en la distribución de carga), prácticamente estamos usando un recurso nemotécnico necesario para algunos cálculos que se harán hacia el final de esta discusión
+}
+\end{equation}
+Aplicamos el Teorema de la Divergencia 
+\begin{align*}
+\int_V\nabla'\cdot\vec{F}\ dV'&=\oint_{\partial V}\vec{F}\cdot\hat{n}dS'\\
+&=\oint_{\partial V}\varphi\nabla'\psi\cdot\hat{n}dS'
+\end{align*}
+y notemos que la manera en que escribimos $\nabla'\psi\cdot\hat{n}$, es equivalente a la derivada direccional de $\psi$ en dirección de $\hat{n}$
+$$\nabla'\psi\cdot\hat{n}=\frac{\partial\psi}{\partial n'}$$
+entonces
+$$\oint_{\partial V}\varphi\nabla'\psi\cdot\hat{n}dS'=\oint_{\partial V}\varphi\frac{\partial\psi}{\partial n'}\  dS'$$
+ahora podemos reescribir la ecuación (\ref{eq:integrarCampos}) en términos del teorema de la divergencia y de la derivada direccional como:
+\begin{equation}\label{eq:identidadDeGreen1}
+\int_V\left(\nabla'\varphi\cdot\nabla'\psi+\varphi\nabla'^2\psi\right)dV'=\oint_{\partial V}\varphi\frac{\partial\psi}{\partial n'}\  dS'
+\end{equation}
+a la ecuación (\ref{eq:identidadDeGreen1}) la llamamos la \emph{Primera Identidad de Green}. 
+
+\subsubsection{Segunda identidad de Green}
+
+Para definir la segunda, necesitamos proponer otro campo vectorial similar a $\vec{F}$, sea $\vec{K}=\psi\nabla\varphi$, su respectiva primera identidad de Green es:
+$$\int_V\left(\nabla'\psi\cdot\nabla'\varphi+\psi\nabla'^2\varphi\right)dV'=\oint_{\partial V}\psi\frac{\partial\varphi}{\partial n'}\  dS'$$
+no es gran hazaña, solo intercambiamos los lugares de $\varphi$ y $\psi$. Restamos la identidad de Green de $\vec{F}$ de la de $\vec{K}$ y así podemos definir la \emph{Segunda Identidad de Green}
+\begin{equation}\label{eq:segundaIdentidadGreen}
+\int_V\left(\varphi\nabla'^2\psi-\psi\nabla'^2\varphi\right)dV'=\oint_{\partial V}\left(\varphi\frac{\partial\psi}{\partial n'}-\psi\frac{\partial\varphi}{\partial n'}\right)dS'
+\end{equation}
+Hasta aquí terminamos con el formalismo matemático, regresemos a ser físicos de nuevo.
+\subsubsection{Física de las identidades de Green}
+Podemos atribuirle valores específicos a las funciones escalares $\varphi$ y $\psi$. Decimos que
+\begin{equation}\label{eq:potencialesConsiderados}
+\varphi=\phi(\vec{r}),\qquad\psi=\frac{1}{\|\vec{r}-\vec{r}\ '\|}
+\end{equation}
+y debido a que son los potenciales eléctricos antes trabajados, sabemos quienes son sus ecuaciones de Poisson
+$$\nabla^2\phi(\vec{r})=-4\pi\rho(\vec{r}),\qquad\nabla^2\frac{1}{\|\vec{r}-\vec{r}\ '\|}=-4\pi\delta(\vec{r}-\vec{r}\ ')\ \footnote{notemos que el potencial $\phi(\vec{r})$ podría ser un potencial de cualquier distribución de carga dependiendo de como sea $\rho(\vec{r})$, sin embargo, el potencial $\psi$ lo estamos definiendo para una sola carga.}$$
+sustituyendo estas cantidades en la segunda identidad de Green (\ref{eq:segundaIdentidadGreen}) tenemos
+$$\int_V\left[-4\pi\phi(\vec{r})\delta(\vec{r}-\vec{r}\ ')+4\pi\frac{\rho(\vec{r})}{\|\vec{r}-\vec{r}\ '\|}\right]dV'=\oint_{\partial V}\left(\phi(\vec{r})\frac{\partial}{\partial n'}\frac{1}{\|\vec{r}-\vec{r}\ '\|}-\frac{1}{\|\vec{r}-\vec{r}\ '\|}\frac{\partial\phi(\vec{r})}{\partial n'}\right)dS'$$
+queremos “despejar'' el potencial, y podemos hacer algunas cosas del lado izquierdo de la igualdad.\footnote{aquí nos sirve el recurso nemotécnico, al aplicar la delta de Dirac, necesitamos saber como se debe aplicar, nuestras variables de integración son las primadas.} Notemos que tenemos una delta de Dirac cuya variable es $\vec{r}\ '$, eso implica que el aplicarla nos resulta
+$$-4\pi\int_V\phi(\vec{r})\delta(\vec{r}-\vec{r}\ ')\ dV'=-4\pi\phi(\vec{r}),\ \footnote{para que la aplicación tenga sentido, las $\vec{r}\ '$ y $\vec{r}$ deben estar definidas dentro del volumen}$$
+del segundo término, notemos que tenemos la expresión del potencial en términos de la densidad de carga. Despejamos el potencial que obtuvimos de la delta y tenemos
+\begin{equation}\label{eq:nuevoPotencial}
+\phi(\vec{r})=\int_V\frac{\rho(\vec{r})}{\|\vec{r}-\vec{r}\ '\|}+\oint_{\partial V}\left(\frac{1}{\|\vec{r}-\vec{r}\ '\|}\frac{\partial\phi(\vec{r})}{\partial n'}-\phi(\vec{r})\frac{\partial}{\partial n'}\frac{1}{\|\vec{r}-\vec{r}\ '\|}\right)dS'
+\end{equation}
+¿Qué concluimos con esta nueva expresión? Definitivamente hemos encontrado una nueva expresión para determinar el potencial en términos de una densidad de carga, pero con el detalle de que ahora podemos conocer el potencial en la ¡superficie!, en otras palabras, podemos conocer como es el potencial de una distribución de carga en un volumen $V$ y su frontera $\partial V$, cosa que no habíamos considerado aneteriormente. ¿En qué casos la integral de superficie será cero? cuando definamos un volumen muy grande tal que el área de la superficie tienda a infinito, recordemos que cuando ocurre esto la integral de superficie tiende a cero debido a que la integral es proporcional a $\frac{1}{r}$, cuando 
+$$r\to\infty,\qquad\frac{1}{r}\to0$$
+sin embargo, si la distribución queda cerca de la superficie, las integrales de superficie no se anulan, y esto es de suma relevancia porque ahora podemos conocer el potencial en la superficie sin la necesidad de tener una carga encerrada. En dicho caso, es evidente que el primer término de (\ref{eq:nuevoPotencial}) se anula pero las integrales de superficie no.
+
+Para conocer como son las integrales de superficie, debemos hacer el tratado con condiciones de Dirichlet y condiciones de Neumann
+
+\subsubsection*{Condiciones de Dirichlet}
+
+A Grandes rasgos solo refiere a que el potencial $\phi$ es conocido en la frontera de nuestra superficie.
+
+\subsubsection*{Condiciones de Neumann}
+
+Este problema refiere a los momentos en donde la derivada direccional del potencial en dirección de los vectores normales $\hat{n}$ es conocida $\frac{\partial\phi}{\partial n}\big |_{\partial V}$, esto a su vez implica que ¡podemos conocer el valor del campo eléctrico en dirección normal a la superficie!
+
+\subsection{Función de Green}
+En la sección pasada encontramos una expresión para poder obtener el potencial eléctrico pero de una manera más genera, considerando la frontera $\partial V$ de nuestro volumen gaussiano. También mencionamos qué condiciones de frontera nos puede ayudar a resolver este problema: \textbf{Condiciones de Dirichlet}, para cuando sabemos el valor del potencial $\phi(\vec{r})$ en la frontera, y las \textbf{Condiciones de Neumann}, cuando sabemos como son las derivadas direccionales del campo en dirección normal a la superficie, otro modo de verlo sería conocer el campo eléctrico normal a la superficie.
+
+En esta sección, nos vamos a encargar de definir un artilugio necesario para darle solución a la ecuación (\ref{eq:nuevoPotencial}), la llamada \textbf{Función de Green}; esta función nos sirve en general para encontrar soluciones de Ecuaciones Diferenciales con valores en la frontera.
+
+En particular, la ecuación de Poisson nos será de gran utilidad para resolver el problema; merece la pena mencionar, ¿por qué no ocupar las ecuaciones de Maxwell para resolver el problema? En principio no sabemos como es el valor del campo Eléctrico en el volumen ni mucho menos en superficie, y en principio el potencial tampoco lo conocemos pero ¿entonces? La respuesta radica en que el problema en términos del potencial tiene más información que en términos del campo eléctrico, contamos con las condiciones de frontera antes mencionadas y eso en verdad es un gran plus.
+
+Considerando los potenciales con los que trabajamos en la sección anterior (\ref{eq:potencialesConsiderados}), más en específico la ecuación de Poisson de $\psi$
+$$\nabla^2\frac{1}{\|\vec{r}-\vec{r}\ '\|}=-4\pi\delta(\vec{r}-\vec{r}\ ')$$
+podemos generar un conjunto de soluciones a las que llamamos \textbf{Funciones de Green}, y las denotamos como $G(\vec{r},\vec{r}\ ')$. Las funciones de Green deben satisfacer la ecuación de Poisson
+$$\nabla^2G(\vec{r},\vec{r}\ ')=-4\pi\delta(\vec{r}-\vec{r}\ ')$$
+y la vamos a definir de la siguiente manera
+\begin{equation}\label{eq:funciondeGreen}
+G(\vec{r},\vec{r}\ ')=\frac{1}{\|\vec{r}-\vec{r}\ '\|}+F(\vec{r},\vec{r}\ ')
+\end{equation}
+Notemos que estamos “complementando'' al potencial que conocemos de siempre; la razón es porque $\phi=\frac{1}{\|\vec{r}-\vec{r}\ '\|}$ no satisface en general los problemas de Dirichlet o de Neumann, es decir, que no podemos definir el potencial en la frontera de nuesto volumen, o las derivadas direccionales normales a la superficie del potencial eléctrico. Es por ello que agregamos a dicho potencial, otro potencial de “referencia'' para los problemas estén bien definidos y tengan solución.
+
+Sin embargo, ¿existirán casos particulares para los cuales no necesitamos dicho potencial $F(\vec{r},\vec{r}\ ')$? La respuesta es si, recordemos que podíamos definir que el valor del potencial en infinito es igual a cero, es decir
+$$\phi(\vec{r})\big |_{\vec{r}\to\infty}=0$$
+este caso es para cuando nuestra región estudiada $(V)$ es todo el espacio. En dicho caso, el potencial de referencia es $F(\vec{r},\vec{r}\ ')=0$ ya que tenemos condiciones de Dirichlet en la frontera, y no necesitamos de los servicios de $F$.
+
+Ahora si, veamos como se resuelve la ecuación (\ref{eq:nuevoPotencial}) en términos de la función de Green. Vamos a ocupar la segunda identidad de Green (\ref{eq:segundaIdentidadGreen}), pero en este caso vamos a ocupar las siguientes funciones escalares
+\begin{align*}
+\varphi&=\phi(\vec{r}),\qquad\text{el potencial eléctrico}\\
+\psi&=G(\vec{r},\vec{r}\ '),\qquad\text{la función de Green (\ref{eq:funciondeGreen})}
+\end{align*}
+entonces
+$$\int_V\left[\phi\nabla^2G-G\nabla^2\phi\right]dV'=\oint_{\partial V}\left(\phi\frac{\partial G}{\partial n'}-G\frac{\partial \phi}{\partial n'}\right)dS'$$
+utilizamos las ecuaciones de Poisson correspondientes para el lado izquierdo de la igualdad
+$$-4\pi\int_V\left [\phi(\vec{r})\delta(\vec{r}-\vec{r}\ ')+G(\vec{r},\vec{r}\ ')\rho(\vec{r})\right ]dV'=\oint_{\partial V}\left(\phi\frac{\partial G}{\partial n'}-G\frac{\partial \phi}{\partial n'}\right)dS'$$
+nuevamente despejamos el potencial para tener una expresión similar a (\ref{eq:nuevoPotencial})
+$$\phi(\vec{r})=\int_VG(\vec{r},\vec{r}\ ')\rho(\vec{r})\ dV'+\frac{1}{4\pi}\oint_{\partial V}\left(G(\vec{r},\vec{r}\ ')\frac{\partial\phi(\vec{r})}{\partial n'}-\phi(\vec{r})\frac{\partial G(\vec{r},\vec{r}\ ')}{\partial n'}\right)dS'$$
+
+
+
+
+
+\end{document}
