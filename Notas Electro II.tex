@@ -346,22 +346,26 @@ Por lo tanto, podemos definir el campo del dipolo bajo la siguiente expresión.
 \end{equation}
 Recordemos que la cantidad $\vec{p}\cdot\vec{r}$ la podíamos ver como la magnitud del vector $\vec{p}$ en dirección de $\hat{r}$, y se le resta el vector de momento dipolar magnético entre el cubo de la distancia a la carga de prueba $q$, ese es el vector del campo eléctrico del dipolo.
 
-Igual como hicimos con el potencial en $r=0$, qué sucede con el campo del dipolo (\ref{eq:campoDipolo}) en $r=0$, ya que evidenemente ahí el campo no está definido. Pues vamos a trabajar este problema en el limite cuando $r\to0$, es decir, vamos a integrar el campo en una vecindad alrededor del cero. Antes de comenzar, desarrollemos los pasos para llegar al teorema de la divergencia, consideremos el potencial del dipolo como $\phi_d$
+Igual como hicimos con el potencial en $r=0$, qué sucede con el campo del dipolo (\ref{eq:campoDipolo}) en $r=0$, ya que evidenemente ahí el campo no está definido. Pues vamos a trabajar este problema en el limite cuando $r\to0$, es decir, vamos a integrar el campo en una vecindad alrededor del cero. Consideremos el potencial del dipolo como $\phi_d$
 \begin{align*}
-\vec{E}_d&=-\nabla\phi_d,\qquad\text{aplicando la divergencia en ambos lados tenemos}\\
-\nabla\cdot\vec{E}_d&=-\nabla\cdot(\nabla\phi_d)\\
-&=-\nabla^2\phi_d,\qquad\text{integrando ambos lados en el volumen de la esfera considerada tenemos}\\
-\int_V\nabla\cdot\vec{E}_d\ dV&=-\int_V\nabla^2\phi_d\ dV\\
+\vec{E}_d&=-\nabla\phi_d,\qquad\text{integrando sobre une vecindad $V$ alrededor del cero}\\
+\int_V\vec{E}_d\ dV&=-\int_V \nabla\phi_d\ dV\\
+&=-\int_V \nabla\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right) dV\\
+&=-\int_L\nabla\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\frac{4}{3}\pi r^2\ dr
 \end{align*}
-aplicamos el teorema de la divergencia en la parte izquierda de la iguadad
+como estamos integrando sobre una esfera podemos usar coordenadas esféricas, y podemos simplificar nuestra integral mediante una integral sobre r, entonces
 \begin{align*}
--\int_V\nabla^2\phi_d\ dV&=-\oint_{\partial V}\nabla\phi_d  \cdot r^2d\Omega\\
-&=-\oint_{\partial V}\nabla\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\cdot r^2d\Omega\\
-&=-\oint_{\partial V}\frac{\partial}{\partial r}\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\cdot r^2d\Omega\qquad\text{integramos por partes}\\
-&=\frac{8\pi}{r}\vec{p}
+-\int_L\nabla\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\frac{4}{3}\pi r^2\ dr&=-\int_L\frac{\partial}{\partial r}\left(\frac{\vec{p}\cdot\hat{r}}{r^2}\right)\frac{4}{3}\pi r^2\ dr\qquad\text{integramos por partes}	\\
+&=-\frac{4}{3}\pi\vec{p}\cdot\hat{r}+\int_0^R\frac{\vec{p}\cdot\hat{r}}{r^2}\cdot 2r\ dr\\
+&=-\frac{4}{3}\pi\vec{p}\cdot\hat{r}+2\vec{p}\cdot\hat{r}\cancelto{0}{\ln(r)}\big |_{r=1}\\
+&=-\frac{4}{3}\pi\vec{p} 
 \end{align*}
-y así llegamos al resultado\footnote{debo corregir este cálculo pronto, esta mal.}, pero aún así debemos parchar el resultado con la delta de dirac:
-$$\frac{8\pi}{r}\vec{p}\delta(\vec{r}),\footnote{Hay que escribir la ecuación completa del campo con su parche}$$
+en nuestro último renglón, como tenemos el vector $\vec{p}$ proyectado en el unitario $\vec{r}$, al final podemos quedarnos únicamente con el vector $\vec{p}$. Y así llegamos al resultado pero aún así debemos parchar el resultado con la delta de dirac:
+$$E_d(\vec{r}\ '=0)=-\frac{4}{3}\pi\vec{p}\delta(\vec{r})$$
+Finalmente podemos escribir la expresión del campo del dipolo como
+\begin{equation}\label{eq:E_dipoloChida}
+E_d(\vec{r})=\frac{3(\vec{p}\cdot\vec{r})\hat{r}-\vec{p}}{r^3}-\frac{4}{3}\pi\vec{p}\delta(\vec{r})
+\end{equation}
 
 \newpage
 \subsection{Energía de una distribución de carga}
@@ -550,6 +554,17 @@ utilizamos las ecuaciones de Poisson correspondientes para el lado izquierdo de 
 $$-4\pi\int_V\left [\phi(\vec{r})\delta(\vec{r}-\vec{r}\ ')+G(\vec{r},\vec{r}\ ')\rho(\vec{r})\right ]dV'=\oint_{\partial V}\left(\phi\frac{\partial G}{\partial n'}-G\frac{\partial \phi}{\partial n'}\right)dS'$$
 nuevamente despejamos el potencial para tener una expresión similar a (\ref{eq:nuevoPotencial})
 $$\phi(\vec{r})=\int_VG(\vec{r},\vec{r}\ ')\rho(\vec{r})\ dV'+\frac{1}{4\pi}\oint_{\partial V}\left(G(\vec{r},\vec{r}\ ')\frac{\partial\phi(\vec{r})}{\partial n'}-\phi(\vec{r})\frac{\partial G(\vec{r},\vec{r}\ ')}{\partial n'}\right)dS'$$
+Llegando a este punto, debemos escoger condiciones de frontera óptimas para poder resolver el problema, con ellas también debemos hacer una elección de la función de Green para que tenga solución el problema.
+
+Si intentaramos definir $G_D(\vec{r},\vec{r}\ ')=0$ cuando $\vec{r}\in V$ y $\vec{r}\ '(s)\in\partial V$ entonces tendríamos
+$$\phi(\vec{r})=\int_V\rho G_D\ dV'-\frac{1}{4\pi}\oint_{\partial V}\phi(\vec{r})\frac{\partial G_D}{\partial n'}\ dS'$$
+notemos que no podemos hacer $\frac{\partial G_D}{\partial n'}=0$ porque sabemos que SI hay campo eléctrico sobre la superficie. Veamos que pasa con las condiciones de Neumann
+$$\phi(\vec{r})=\int_V\rho G_N\ dV'+\frac{1}{4\pi}\oint_{\partial V}G_N\frac{\partial \phi}{\partial n'}\ dS'-\frac{1}{4\pi}\oint_{\partial V}\phi(\vec{r})\frac{\partial G_N}{\partial n'}\ dS'$$
+si decidieramos hacer el valor ponderado (o promedio) del campo eléctrico sobre la superficie 
+$$\frac{1}{S}\oint_{\partial V}\phi(\vec{r})\frac{\partial G_N}{\partial n'}\ dS'=\langle\phi\rangle_S$$
+podemos definir el \textbf{potencial de Neumann}
+$$\phi(\vec{r})=\int_V\rho G_N\ dV'+\frac{1}{4\pi}\oint_{\partial V}G_N\frac{\partial \phi}{\partial n'}\ dS'-\langle\phi(\vec{r})\rangle_S$$
+y la idea es resolver este problema por medio del método de las imágenes\footnote{de ecuaciones diferenciales parciales???}. Fundamentamos la existencia de energía de una distribución de carga que va a generar $\langle\phi\rangle_S$ con el cual se puede resolver de manera unívoca un problema de electrostática con condiciones de N/D con el método de las imágenes.
 
 
 
